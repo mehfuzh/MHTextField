@@ -1,4 +1,4 @@
-MHTextbox
+MHTextField
 =========
 
-UITextBox extension with built-In toolbar and scrolling support.
+UITextField extension with built-In toolbar, validation and scrolling support.
