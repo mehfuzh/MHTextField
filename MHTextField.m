@@ -21,6 +21,7 @@
 @property (nonatomic) BOOL invalid;
 
 @property (nonatomic) BOOL isToolBarCommand;
+@property (nonatomic) BOOL isDoneCommand;
 
 @property (nonatomic , strong) UIBarButtonItem *previousBarButton;
 @property (nonatomic , strong) UIBarButtonItem *nextBarButton;
@@ -37,7 +38,6 @@
 @synthesize keyboardIsShown;
 @synthesize keyboardSize;
 @synthesize invalid;
-@synthesize isToolBarCommand;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -98,8 +98,11 @@
 }
 
 - (void) doneButtonIsClicked:(id)sender{
+    _isDoneCommand = YES;
+    
     [self resignFirstResponder];
-    isToolBarCommand = YES;
+
+    _isToolBarCommand = YES;
 }
 
 -(void) keyboardDidShow:(NSNotification *) notification {
@@ -123,7 +126,7 @@
     NSTimeInterval duration = [[[notification userInfo] valueForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
     [UIView animateWithDuration:duration animations:^{
-         if (!isToolBarCommand)
+         if (!_isToolBarCommand)
              [self.scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
      }];
     
@@ -141,7 +144,7 @@
         textField = [self.textFields objectAtIndex:++tagIndex];
     }
     
-    isToolBarCommand = YES;
+    _isToolBarCommand = YES;
     [self resignFirstResponder];
     [textField becomeFirstResponder];
 }
@@ -156,7 +159,7 @@
         textField = [self.textFields objectAtIndex:--tagIndex];
     }
     
-    isToolBarCommand = YES;
+    _isToolBarCommand = YES;
     
     [textField becomeFirstResponder];
     [self resignFirstResponder];
@@ -203,12 +206,23 @@
     }
     
     self.inputAccessoryView = toolbar;
-    isToolBarCommand = NO;
+    
+    _isToolBarCommand = NO;
+    _isDoneCommand = NO;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     [self validate];
+   
     _textField = nil;
+    
+    if (_isDateField && [textField.text isEqualToString:@""] && _isDoneCommand){
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+       
+        [dateFormatter setDateFormat:@"MM/dd/YY"];
+        [textField setText:[dateFormatter stringFromDate:[NSDate date]]];
+        
+    }
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
