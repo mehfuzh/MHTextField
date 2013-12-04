@@ -22,6 +22,7 @@
 		61FD2190184E604300884F3E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 61FD218E184E604300884F3E /* InfoPlist.strings */; };
 		61FD2192184E604300884F3E /* MHTextFieldTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FD2191184E604300884F3E /* MHTextFieldTests.m */; };
 		61FD219D184E634200884F3E /* MHTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FD219C184E634200884F3E /* MHTextField.m */; };
+		61FD21A0184ED97000884F3E /* DemoTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FD219F184ED97000884F3E /* DemoTextField.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		61FD2191184E604300884F3E /* MHTextFieldTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MHTextFieldTests.m; sourceTree = "<group>"; };
 		61FD219B184E634100884F3E /* MHTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHTextField.h; path = ../../MHTextField.h; sourceTree = "<group>"; };
 		61FD219C184E634200884F3E /* MHTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHTextField.m; path = ../../MHTextField.m; sourceTree = "<group>"; };
+		61FD219E184ED97000884F3E /* DemoTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoTextField.h; sourceTree = "<group>"; };
+		61FD219F184ED97000884F3E /* DemoTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoTextField.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +127,8 @@
 				61FD217C184E604300884F3E /* MHViewController.m */,
 				61FD217E184E604300884F3E /* Images.xcassets */,
 				61FD216D184E604300884F3E /* Supporting Files */,
+				61FD219E184ED97000884F3E /* DemoTextField.h */,
+				61FD219F184ED97000884F3E /* DemoTextField.m */,
 			);
 			path = MHTextField;
 			sourceTree = "<group>";
@@ -259,6 +264,7 @@
 				61FD2173184E604300884F3E /* main.m in Sources */,
 				61FD217D184E604300884F3E /* MHViewController.m in Sources */,
 				61FD2177184E604300884F3E /* MHAppDelegate.m in Sources */,
+				61FD21A0184ED97000884F3E /* DemoTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +473,7 @@
 				61FD2197184E604300884F3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		61FD2198184E604300884F3E /* Build configuration list for PBXNativeTarget "MHTextFieldTests" */ = {
 			isa = XCConfigurationList;
@@ -475,6 +482,7 @@
 				61FD219A184E604300884F3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

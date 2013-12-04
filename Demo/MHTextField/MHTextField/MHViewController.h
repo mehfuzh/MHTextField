@@ -7,15 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MHTextField.h"
+#import "DemoTextField.h"
 
 @interface MHViewController : UIViewController
-@property (strong, nonatomic) IBOutlet MHTextField *emailTextField;
-@property (strong, nonatomic) IBOutlet MHTextField *passwordTextField;
-@property (strong, nonatomic) IBOutlet MHTextField *firstNameTextField;
-@property (strong, nonatomic) IBOutlet MHTextField *lastNameTextField;
-@property (strong, nonatomic) IBOutlet MHTextField *phoneTextField;
-@property (strong, nonatomic) IBOutlet MHTextField *ageTextField;
-@property (strong, nonatomic) IBOutlet MHTextField *zipTextField;
+@property (strong, nonatomic) IBOutlet DemoTextField *emailTextField;
+@property (strong, nonatomic) IBOutlet DemoTextField *passwordTextField;
+@property (strong, nonatomic) IBOutlet DemoTextField *firstNameTextField;
+@property (strong, nonatomic) IBOutlet DemoTextField *lastNameTextField;
+@property (strong, nonatomic) IBOutlet DemoTextField *phoneTextField;
+@property (strong, nonatomic) IBOutlet DemoTextField *ageTextField;
+@property (strong, nonatomic) IBOutlet DemoTextField *zipTextField;
+- (IBAction)createAccount:(id)sender;
 
 @end
