@@ -22,13 +22,11 @@
 @property (nonatomic) BOOL required;
 @property (nonatomic, strong) UIToolbar *toolbar;
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, strong) UIView *parentView;
 @property (nonatomic, setter = setDateField:) BOOL isDateField;
 @property (nonatomic, setter = setEmailField:) BOOL isEmailField;
 
 @property (nonatomic, assign) id<MHTextFieldDelegate> textFieldDelegate;
 
 - (BOOL) validate;
-- (void)initTextFields;
 
 @end
