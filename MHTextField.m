@@ -6,7 +6,6 @@
 //
 
 #import "MHTextField.h"
-#import <QuartzCore/QuartzCore.h>
 
 @interface MHTextField()
 {
