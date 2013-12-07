@@ -14,14 +14,13 @@
     BOOL _disabled;
 }
 
-
 @property (nonatomic) BOOL keyboardIsShown;
 @property (nonatomic) CGSize keyboardSize;
 @property (nonatomic) BOOL hasScrollView;
 @property (nonatomic) BOOL invalid;
 
-@property (nonatomic) BOOL isToolBarCommand;
-@property (nonatomic) BOOL isDoneCommand;
+@property (nonatomic, setter = setToolbarCommand:) BOOL isToolBarCommand;
+@property (nonatomic, setter = setDoneCommand:) BOOL isDoneCommand;
 
 @property (nonatomic , strong) UIBarButtonItem *previousBarButton;
 @property (nonatomic , strong) UIBarButtonItem *nextBarButton;
@@ -79,16 +78,16 @@
     
     self.textFields = [[NSMutableArray alloc]init];
     
-    [self initTextFields];
+    [self markTextFieldsWithTagInView:self.superview];
 }
 
-- (void)initTextFields
+- (void)markTextFieldsWithTagInView:(UIView*)view
 {
     int index = 0;
     if ([self.textFields count] == 0){
-        for(UIView *view in self.superview.subviews){
-            if ([view isKindOfClass:[MHTextField class]]){
-                MHTextField *textField = (MHTextField*)view;
+        for(UIView *subView in view.subviews){
+            if ([subView isKindOfClass:[MHTextField class]]){
+                MHTextField *textField = (MHTextField*)subView;
                 textField.tag = index;
                 [self.textFields addObject:textField];
                 index++;
@@ -97,15 +96,15 @@
     }
 }
 
-- (void) doneButtonIsClicked:(id)sender{
-    _isDoneCommand = YES;
-    
+- (void) doneButtonIsClicked:(id)sender
+{
+    [self setDoneCommand:YES];
     [self resignFirstResponder];
-
-    _isToolBarCommand = YES;
+    [self setToolbarCommand:YES];
 }
 
--(void) keyboardDidShow:(NSNotification *) notification {
+-(void) keyboardDidShow:(NSNotification *) notification
+{
     if (_textField == nil) return;
     if (keyboardIsShown) return;
     if (![_textField isKindOfClass:[MHTextField class]]) return;
@@ -121,7 +120,8 @@
     
 }
 
--(void) keyboardWillHide:(NSNotification *) notification {
+-(void) keyboardWillHide:(NSNotification *) notification
+{
     
     NSTimeInterval duration = [[[notification userInfo] valueForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
@@ -136,7 +136,8 @@
 }
 
 
-- (void) nextButtonIsClicked:(id)sender{
+- (void) nextButtonIsClicked:(id)sender
+{
     NSInteger tagIndex = self.tag;
     MHTextField *textField =  [self.textFields objectAtIndex:++tagIndex];
     
@@ -150,7 +151,8 @@
 }
 
 
-- (void) previousButtonIsClicked:(id)sender{
+- (void) previousButtonIsClicked:(id)sender
+{
     NSInteger tagIndex = self.tag;
     
     MHTextField *textField =  [self.textFields objectAtIndex:--tagIndex];
@@ -159,7 +161,7 @@
         textField = [self.textFields objectAtIndex:--tagIndex];
     }
     
-    _isToolBarCommand = YES;
+    [self setToolbarCommand:YES];
     
     [textField becomeFirstResponder];
     [self resignFirstResponder];
@@ -185,15 +187,14 @@
     self.nextBarButton.enabled = nexBarButtonEnabled;
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField{
-    
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
     _textField = textField;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardDidShow:)
                                                  name:UIKeyboardDidShowNotification
                                                object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
@@ -207,11 +208,12 @@
     
     self.inputAccessoryView = toolbar;
     
-    _isToolBarCommand = NO;
-    _isDoneCommand = NO;
+    [self setDoneCommand:NO];
+    [self setToolbarCommand:NO];
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField{
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
     [self validate];
    
     _textField = nil;
@@ -257,7 +259,8 @@
     [self validate];
 }
 
-- (void)scrollToField{
+- (void)scrollToField
+{
     CGRect textFieldRect = _textField.frame;
     
     CGRect aRect = self.window.bounds;
@@ -276,7 +279,8 @@
     }
 }
 
-- (BOOL) validate{
+- (BOOL) validate
+{
     self.backgroundColor = [UIColor colorWithRed:255 green:0 blue:0 alpha:0.5];
     
     if (required && [self.text isEqualToString:@""]){
