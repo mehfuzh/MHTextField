@@ -6,6 +6,10 @@
 //
 
 #import "MHTextField.h"
+#import "CDatePickerViewEx.h"
+#import "NSDate+Year.h"
+
+#define MONTH_YEAR_FORMAT @"MMMM yyyy"
 
 @interface MHTextField()
 {
@@ -15,6 +19,7 @@
 
 @property (nonatomic) BOOL keyboardIsShown;
 @property (nonatomic) CGSize keyboardSize;
+@property (nonatomic) CGPoint keyboardOrigin;
 @property (nonatomic) BOOL hasScrollView;
 @property (nonatomic) BOOL invalid;
 
@@ -35,6 +40,7 @@
 @synthesize toolbar;
 @synthesize keyboardIsShown;
 @synthesize keyboardSize;
+@synthesize keyboardOrigin;
 @synthesize invalid;
 
 - (id)initWithFrame:(CGRect)frame
@@ -57,7 +63,7 @@
 {
     self.delegate = self;
    
-    [self setTintColor:[UIColor blackColor]];
+    //[self setTintColor:[UIColor blackColor]];
     
     toolbar = [[UIToolbar alloc] init];
     toolbar.frame = CGRectMake(0, 0, self.window.frame.size.width, 44);
@@ -112,6 +118,7 @@
     
     NSValue *aValue = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];
     keyboardSize = [aValue CGRectValue].size;
+    keyboardOrigin = [aValue CGRectValue].origin;
     
     [self scrollToField];
     
@@ -203,6 +210,8 @@
     
     if ([self.superview isKindOfClass:[UIScrollView class]] && self.scrollView == nil){
         self.scrollView = (UIScrollView*)self.superview;
+    } else if ([self.superview.superview isKindOfClass:[UIScrollView class]] && self.scrollView == nil){
+        self.scrollView = (UIScrollView*)self.superview.superview;
     }
     
     self.inputAccessoryView = toolbar;
@@ -222,7 +231,13 @@
        
         [dateFormatter setDateFormat:@"MM/dd/YY"];
         [textField setText:[dateFormatter stringFromDate:[NSDate date]]];
-        
+
+    } else if (_isMonthYearField) {
+        CDatePickerViewEx *datePicker = (CDatePickerViewEx *) textField.inputView;
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:MONTH_YEAR_FORMAT];
+        [textField setText:[dateFormatter stringFromDate:[datePicker date]]];
+
     }
 }
 
@@ -233,7 +248,7 @@
         datePicker.datePickerMode = UIDatePickerModeDate;
         [datePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
         
-        if (![textField.text isEqualToString:@""]){
+        if (textField.text && ![textField.text isEqualToString:@""]){
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"MM/dd/YY"];
             [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
@@ -241,6 +256,26 @@
             [datePicker setDate:[dateFormatter dateFromString:textField.text]];
         }
         [textField setInputView:datePicker];
+    } else if (_isMonthYearField) {
+        //UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+        CDatePickerViewEx *datePicker = [[CDatePickerViewEx alloc] initWithYearsFrom:1901 to:[[NSDate date] year] - 13 ];
+
+
+
+        //datePicker.datePickerMode = UIDatePickerModeDate;
+        // [datePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
+
+        if (textField.text && ![textField.text isEqualToString:@""]){
+            NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+            NSLocale *locale=[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+            [dateFormatter setLocale: locale];
+            [dateFormatter setDateFormat:MONTH_YEAR_FORMAT];
+            [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
+            //[dateFormatter setDateStyle:kCFDateFormatterNoStyle];
+            NSDate* date = [dateFormatter dateFromString:textField.text];
+            [datePicker selectDate:date];
+        }
+        [textField setInputView:datePicker];        
     }
     return !_disabled;
 }
@@ -260,6 +295,11 @@
 
 - (void)scrollToField
 {
+    if ( nil == self.scrollView ) {
+        return;
+    }
+
+    /*
     CGRect textFieldRect = _textField.frame;
     
     CGRect aRect = self.window.bounds;
@@ -276,13 +316,32 @@
         
         [scrollView setContentOffset:scrollPoint animated:YES];
     }
+    
+            */
+
+      UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+      //scrollView.contentInset = contentInsets;
+      //scrollView.scrollIndicatorInsets = contentInsets;
+
+      CGRect absoluteRect = (CGRect) [scrollView.superview convertRect:scrollView.frame toView:nil];
+
+      absoluteRect.size.height = keyboardOrigin.y - absoluteRect.origin.y;
+      CGPoint responderOrigin = _textField.frame.origin;
+      responderOrigin.y = responderOrigin.y;
+      responderOrigin = [_textField.superview convertPoint:responderOrigin toView:nil];
+      if (!CGRectContainsPoint(absoluteRect, responderOrigin) ) {
+          CGPoint scrollPoint = CGPointMake(0.0, _textField.frame.origin.y - absoluteRect.size.height + _textField.frame.size.height + 4);
+          [scrollView setContentOffset:scrollPoint animated:YES];
+      }
+
+    
 }
 
 - (BOOL) validate
 {
     self.backgroundColor = [UIColor colorWithRed:255 green:0 blue:0 alpha:0.5];
     
-    if (required && [self.text isEqualToString:@""]){
+    if (required && (nil == self.text || [self.text isEqualToString:@""])){
         return NO;
     }
     else if (_isEmailField){

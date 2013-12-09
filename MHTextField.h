@@ -24,6 +24,7 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, setter = setDateField:) BOOL isDateField;
 @property (nonatomic, setter = setEmailField:) BOOL isEmailField;
+@property(nonatomic, setter = setMonthYearField:) BOOL isMonthYearField;
 
 @property (nonatomic, assign) id<MHTextFieldDelegate> textFieldDelegate;
 
