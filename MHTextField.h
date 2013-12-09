@@ -11,6 +11,12 @@
 
 @protocol MHTextFieldDelegate <NSObject>
 
+typedef enum {
+    DATE_FIELD,
+    MONTH_YEAR_FIELD,
+    EMAIL_FIELD
+} FieldType;
+
 @required
 - (MHTextField*) textFieldAtIndex:(int)index;
 - (int) numberOfTextFields;
@@ -22,11 +28,8 @@
 @property (nonatomic) BOOL required;
 @property (nonatomic, strong) UIToolbar *toolbar;
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, setter = setDateField:) BOOL isDateField;
-@property (nonatomic, setter = setEmailField:) BOOL isEmailField;
-@property(nonatomic, setter = setMonthYearField:) BOOL isMonthYearField;
-
 @property (nonatomic, assign) id<MHTextFieldDelegate> textFieldDelegate;
+@property(nonatomic) FieldType type;
 
 - (BOOL) validate;
 

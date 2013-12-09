@@ -226,13 +226,13 @@
    
     _textField = nil;
     
-    if (_isDateField && [textField.text isEqualToString:@""] && _isDoneCommand){
+    if (_type == DATE_FIELD && [textField.text isEqualToString:@""] && _isDoneCommand){
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
        
         [dateFormatter setDateFormat:@"MM/dd/YY"];
         [textField setText:[dateFormatter stringFromDate:[NSDate date]]];
 
-    } else if (_isMonthYearField) {
+    } else if (_type == MONTH_YEAR_FIELD ) {
         CDatePickerViewEx *datePicker = (CDatePickerViewEx *) textField.inputView;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:MONTH_YEAR_FORMAT];
@@ -243,7 +243,7 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    if (_isDateField){
+    if (_type == DATE_FIELD){
         UIDatePicker *datePicker = [[UIDatePicker alloc] init];
         datePicker.datePickerMode = UIDatePickerModeDate;
         [datePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
@@ -256,7 +256,7 @@
             [datePicker setDate:[dateFormatter dateFromString:textField.text]];
         }
         [textField setInputView:datePicker];
-    } else if (_isMonthYearField) {
+    } else if (_type == MONTH_YEAR_FIELD) {
         //UIDatePicker *datePicker = [[UIDatePicker alloc] init];
         CDatePickerViewEx *datePicker = [[CDatePickerViewEx alloc] initWithYearsFrom:1901 to:[[NSDate date] year] - 13 ];
 
@@ -344,7 +344,7 @@
     if (required && (nil == self.text || [self.text isEqualToString:@""])){
         return NO;
     }
-    else if (_isEmailField){
+    else if (_type == EMAIL_FIELD){
         NSString *emailRegEx =
         @"(?:[A-Za-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[A-Za-z0-9!#$%\\&'*+/=?\\^_`{|}"
         @"~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
