@@ -11,8 +11,6 @@ MHTextField works on iOS 5 and above and is compatible with ARC projects. It dep
 
 * Foundation.framework
 * UIKit.framework
-* QuartzCore.framework
-
 
 ##Including MHTextField to your project
 
