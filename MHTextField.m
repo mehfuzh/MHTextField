@@ -125,7 +125,7 @@
     NSTimeInterval duration = [[[notification userInfo] valueForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
     [UIView animateWithDuration:duration animations:^{
-         if (!_isToolBarCommand)
+        if (_isDoneCommand)
              [self.scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
      }];
     
@@ -141,13 +141,11 @@
     NSInteger tagIndex = self.tag;
     MHTextField *textField =  [self.textFields objectAtIndex:++tagIndex];
     
-    while (!textField.isEnabled && tagIndex < [self.textFields count]){
+    while (!textField.isEnabled && tagIndex < [self.textFields count])
         textField = [self.textFields objectAtIndex:++tagIndex];
-    }
-    
+
     [self becomeActive:textField];
 }
-
 
 - (void) previousButtonIsClicked:(id)sender
 {
@@ -155,9 +153,9 @@
     
     MHTextField *textField =  [self.textFields objectAtIndex:--tagIndex];
     
-    while (!textField.isEnabled && tagIndex < [self.textFields count]){
+    while (!textField.isEnabled && tagIndex < [self.textFields count])
         textField = [self.textFields objectAtIndex:--tagIndex];
-    }
+    
     [self becomeActive:textField];
 }
 
@@ -212,9 +210,11 @@
     NSDate *selectedDate = datePicker.date;
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM/dd/YY"];
+    [
+     dateFormatter setDateFormat:@"MM/dd/YY"];
     
     [_textField setText:[dateFormatter stringFromDate:selectedDate]];
+    
     [self validate];
 }
 
