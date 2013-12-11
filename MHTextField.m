@@ -57,7 +57,7 @@
 {
     [self setTintColor:[UIColor blackColor]];
     
-   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidBeginEditing:) name:UITextFieldTextDidBeginEditingNotification object:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidBeginEditing:) name:UITextFieldTextDidBeginEditingNotification object:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidEndEditing:) name:UITextFieldTextDidEndEditingNotification object:self];
     
     toolbar = [[UIToolbar alloc] init];
@@ -298,7 +298,7 @@
         self.scrollView = (UIScrollView*)self.superview;
     
     [self selectInputView:textField];
-    self.inputAccessoryView = toolbar;
+    [self setInputAccessoryView:toolbar];
     
     [self setDoneCommand:NO];
     [self setToolbarCommand:NO];
@@ -314,6 +314,7 @@
     
     if (_isDateField && [textField.text isEqualToString:@""] && _isDoneCommand){
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        
         [dateFormatter setDateFormat:@"MM/dd/YY"];
         
         [textField setText:[dateFormatter stringFromDate:[NSDate date]]];
