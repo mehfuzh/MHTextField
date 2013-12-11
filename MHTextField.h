@@ -17,7 +17,7 @@
 
 @end
 
-@interface MHTextField : UITextField<UITextFieldDelegate>
+@interface MHTextField : UITextField
 
 @property (nonatomic) BOOL required;
 @property (nonatomic, strong) UIToolbar *toolbar;
