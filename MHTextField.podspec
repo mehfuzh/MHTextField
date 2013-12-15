@@ -29,6 +29,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/farmisen/MHTextField.git", :tag => '0.0.2'}
   s.source_files  = '*.{h,m}'
   s.requires_arc = true
-  s.dependency = 'NSDate+Calendar'
+  s.dependency  'NSDate+Calendar'
 
 end
