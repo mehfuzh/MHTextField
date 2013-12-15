@@ -14,6 +14,7 @@
 typedef enum {
     DATE_FIELD,
     MONTH_YEAR_FIELD,
+    DAY_MONTH_FIELD,
     EMAIL_FIELD
 } FieldType;
 

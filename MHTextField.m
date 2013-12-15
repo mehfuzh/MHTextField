@@ -8,6 +8,7 @@
 #import "MHTextField.h"
 #import "CDatePickerViewEx.h"
 #import "NSDate+Year.h"
+#import "DayMonthDatePickView.h"
 
 #define MONTH_YEAR_FORMAT @"MMMM yyyy"
 
@@ -276,6 +277,10 @@
             [datePicker selectDate:date];
         }
         [textField setInputView:datePicker];        
+    } else if (_type == DAY_MONTH_FIELD) {
+        //UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+        DayMonthDatePickView *picker = [[DayMonthDatePickView alloc] init];
+        [textField setInputView:picker];
     }
     return !_disabled;
 }
