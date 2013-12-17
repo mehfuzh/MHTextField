@@ -55,7 +55,8 @@
 
 - (void)setup
 {
-    [self setTintColor:[UIColor blackColor]];
+    if ([self respondsToSelector:@selector(setTintColor:)])
+        [self setTintColor:[UIColor blackColor]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidBeginEditing:) name:UITextFieldTextDidBeginEditingNotification object:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidEndEditing:) name:UITextFieldTextDidEndEditingNotification object:self];
