@@ -10,8 +10,7 @@
 
 @implementation DemoTextField
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib{
     [super awakeFromNib];
     
     [self setBorderStyle:UITextBorderStyleNone];
@@ -21,18 +20,15 @@
     [self setBackgroundColor:[UIColor whiteColor]];
 }
 
-- (CGRect)textRectForBounds:(CGRect)bounds
-{
+- (CGRect)textRectForBounds:(CGRect)bounds{
     return CGRectInset(bounds, 10, 5);
 }
 
-- (CGRect)editingRectForBounds:(CGRect)bounds
-{
+- (CGRect)editingRectForBounds:(CGRect)bounds{
     return CGRectInset(bounds, 10, 5);
 }
 
-- (void)layoutSublayersOfLayer:(CALayer *)layer
-{
+- (void)layoutSublayersOfLayer:(CALayer *)layer{
     [super layoutSublayersOfLayer:layer];
     
     [layer setBorderWidth: 0.8];

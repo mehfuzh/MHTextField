@@ -14,8 +14,7 @@
 
 @implementation MHViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
     
     [self.view setBackgroundColor:[UIColor colorWithRed:242/255. green:242/255. blue:246/255. alpha:1.0]];
@@ -40,8 +39,7 @@
 }
 
 
-- (BOOL)validateInputInView:(UIView*)view
-{
+- (BOOL)validateInputInView:(UIView*)view{
     for(UIView *subView in view.subviews){
         if ([subView isKindOfClass:[UIScrollView class]])
             return [self validateInputInView:subView];
