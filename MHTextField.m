@@ -167,7 +167,7 @@
     [textField becomeFirstResponder];
 }
 
-- (void)setBarButtonNeedsDisplayAtTag:(int)tag
+- (void)setBarButtonNeedsDisplayAtTag:(NSInteger)tag
 {
     BOOL previousBarButtonEnabled = NO;
     BOOL nexBarButtonEnabled = NO;
