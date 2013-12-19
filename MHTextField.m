@@ -195,7 +195,11 @@
         
         if (![textField.text isEqualToString:@""]){
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:@"MM/dd/YY"];
+            if (self.dateFormat) {
+                [dateFormatter setDateFormat:self.dateFormat];
+            } else {
+                [dateFormatter setDateFormat:@"MM/dd/YY"];
+            }
             [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
             [dateFormatter setDateStyle:NSDateFormatterShortStyle];
             [datePicker setDate:[dateFormatter dateFromString:textField.text]];
