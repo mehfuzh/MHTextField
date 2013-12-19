@@ -26,8 +26,8 @@
 
 @property (nonatomic, strong) NSMutableArray *textFields;
 
-@property id keyboardDidShowNotificationObserver;
-@property id keyboardWillHideNotificationObserver;
+@property (weak) id keyboardDidShowNotificationObserver;
+@property (weak) id keyboardWillHideNotificationObserver;
 
 @end
 
@@ -281,11 +281,11 @@
     
     _textField = textField;
     
-    [self setKeyboardDidShowNotificationObserver:[[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification object:nil queue:nil usingBlock:^(NSNotification *note){
-        [self keyboardDidShow:note];
+    [self setKeyboardDidShowNotificationObserver:[[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification object:nil queue:nil usingBlock:^(NSNotification *notification){
+        [self keyboardDidShow:notification];
     }]];
-    [self setKeyboardWillHideNotificationObserver:[[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification object:nil queue:nil usingBlock:^(NSNotification *note){
-        [self keyboardWillHide:note];
+    [self setKeyboardWillHideNotificationObserver:[[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification object:nil queue:nil usingBlock:^(NSNotification *notification){
+        [self keyboardWillHide:notification];
     }]];
  
     [self setBarButtonNeedsDisplayAtTag:textField.tag];
