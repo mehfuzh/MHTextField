@@ -1,10 +1,10 @@
 #MHTextField
 MHTextField is an iOS drop-in class that extends UITextField  with built-in toolbar, validation and scrolling support.
 
-[![](http://mehfuzh.github.io/MHTextField/shot2_thumb.png)](http://mehfuzh.github.io/MHTextField/shot2.png)
-[![](http://mehfuzh.github.io/MHTextField/shot3_thumb.png)](http://mehfuzh.github.io/MHTextField/shot3.png)
-[![](http://mehfuzh.github.io/MHTextField/shot4_thumb.png)](http://mehfuzh.github.io/MHTextField/shot4.png)
-[![](http://mehfuzh.github.io/MHTextField/shot5_thumb.png)](http://mehfuzh.github.io/MHTextField/shot5.png)
+[![](https://raw.github.com/mehfuzh/MHTextField/gh-pages/shot1_thumb.png)](http://mehfuzh.github.io/MHTextField/shot2.png)
+[![](https://raw.github.com/mehfuzh/MHTextField/gh-pages/shot3_thumb.png)](http://mehfuzh.github.io/MHTextField/shot3.png)
+[![](https://raw.github.com/mehfuzh/MHTextField/gh-pages/shot4_thumb.png)](http://mehfuzh.github.io/MHTextField/shot4.png)
+[![](https://raw.github.com/mehfuzh/MHTextField/gh-pages/shot5_thumb.png)](http://mehfuzh.github.io/MHTextField/shot5.png)
 
 ##Requirements
 MHTextField works on iOS 5 and above and is compatible with ARC projects. It depends on the following Apple frameworks:
