@@ -26,6 +26,9 @@
 
 @property (nonatomic, strong) NSMutableArray *textFields;
 
+@property id keyboardDidShowNotificationObserver;
+@property id keyboardWillHideNotificationObserver;
+
 @end
 
 @implementation MHTextField
@@ -58,6 +61,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidBeginEditing:) name:UITextFieldTextDidBeginEditingNotification object:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidEndEditing:) name:UITextFieldTextDidEndEditingNotification object:self];
+   
     
     toolbar = [[UIToolbar alloc] init];
     toolbar.frame = CGRectMake(0, 0, self.window.frame.size.width, 44);
@@ -239,53 +243,6 @@
     self.dateFormat = dateFormat;
 }
 
-#pragma mark - UITextField notifications
-
-- (void)textFieldDidBeginEditing:(NSNotification *) notification{
-    UITextField *textField = (UITextField*)[notification object];
-    
-    _textField = textField;
-
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
- 
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
-    [self setBarButtonNeedsDisplayAtTag:textField.tag];
-    
-    if ([self.superview isKindOfClass:[UIScrollView class]] && self.scrollView == nil)
-        self.scrollView = (UIScrollView*)self.superview;
-    
-    [self selectInputView:textField];
-    [self setInputAccessoryView:toolbar];
-    
-    [self setToolbarCommand:NO];
-}
-
-- (void)textFieldDidEndEditing:(NSNotification *) notification{
-    UITextField *textField = (UITextField*)[notification object];
-
-    [self validate];
-    
-    _textField = nil;
-    
-    if (_isDateField && [textField.text isEqualToString:@""] && _isDoneCommand){
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        
-        if (self.dateFormat) {
-            [dateFormatter setDateFormat:self.dateFormat];
-        } else {
-            [dateFormatter setDateFormat:@"MM/dd/YY"];
-        }
-        
-        [textField setText:[dateFormatter stringFromDate:[NSDate date]]];
-    }
-  
-    [self setDoneCommand:NO];
-}
-
-
 #pragma mark - UIKeyboard notifications
 
 - (void) keyboardDidShow:(NSNotification *) notification{
@@ -312,7 +269,56 @@
     }];
     
     keyboardIsShown = NO;
+    
+    [[NSNotificationCenter defaultCenter]removeObserver:self.keyboardDidShowNotificationObserver];
+    [[NSNotificationCenter defaultCenter]removeObserver:self.keyboardWillHideNotificationObserver];
 }
 
+#pragma mark - UITextField notifications
+
+- (void)textFieldDidBeginEditing:(NSNotification *) notification{
+    UITextField *textField = (UITextField*)[notification object];
+    
+    _textField = textField;
+    
+    [self setKeyboardDidShowNotificationObserver:[[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification object:nil queue:nil usingBlock:^(NSNotification *note){
+        [self keyboardDidShow:note];
+    }]];
+    [self setKeyboardWillHideNotificationObserver:[[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification object:nil queue:nil usingBlock:^(NSNotification *note){
+        [self keyboardWillHide:note];
+    }]];
+ 
+    [self setBarButtonNeedsDisplayAtTag:textField.tag];
+    
+    if ([self.superview isKindOfClass:[UIScrollView class]] && self.scrollView == nil)
+        self.scrollView = (UIScrollView*)self.superview;
+    
+    [self selectInputView:textField];
+    [self setInputAccessoryView:toolbar];
+    
+    [self setToolbarCommand:NO];
+}
+
+- (void)textFieldDidEndEditing:(NSNotification *) notification{
+    UITextField *textField = (UITextField*)[notification object];
+   
+    if (_isDateField && [textField.text isEqualToString:@""] && _isDoneCommand){
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        
+        if (self.dateFormat) {
+            [dateFormatter setDateFormat:self.dateFormat];
+        } else {
+            [dateFormatter setDateFormat:@"MM/dd/YY"];
+        }
+        
+        [textField setText:[dateFormatter stringFromDate:[NSDate date]]];
+    }
+    
+    [self validate];
+
+    [self setDoneCommand:NO];
+    
+    _textField = nil;
+}
 
 @end
