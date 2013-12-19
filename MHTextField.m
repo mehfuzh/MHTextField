@@ -276,6 +276,11 @@
         [self setBackgroundColor:[UIColor lightGrayColor]];
 }
 
+- (void)setDateFieldWithFormat:(NSString *)dateFormat {
+    self.isDateField = YES;
+    self.dateFormat = dateFormat;
+}
+
 #pragma mark - UITextField notifications
 
 - (void)textFieldDidBeginEditing:(NSNotification *) notification
@@ -310,7 +315,11 @@
     if (_isDateField && [textField.text isEqualToString:@""] && _isDoneCommand){
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         
-        [dateFormatter setDateFormat:@"MM/dd/YY"];
+        if (self.dateFormat) {
+            [dateFormatter setDateFormat:self.dateFormat];
+        } else {
+            [dateFormatter setDateFormat:@"MM/dd/YY"];
+        }
         
         [textField setText:[dateFormatter stringFromDate:[NSDate date]]];
     }
