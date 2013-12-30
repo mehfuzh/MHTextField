@@ -12,6 +12,7 @@
 @protocol MHTextFieldDelegate <NSObject>
 
 typedef enum {
+    UNKNOW_FIELD_TYPE,
     DATE_FIELD,
     MONTH_YEAR_FIELD,
     DAY_MONTH_FIELD,

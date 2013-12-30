@@ -6,8 +6,8 @@
 #import "DayMonthDatePickView.h"
 
 // Identifiers of components
-#define DAY ( 0 )
-#define MONTH ( 1 )
+#define MONTH ( 0 )
+#define DAY ( 1 )
 
 @implementation DayMonthDatePickView {
 
@@ -32,7 +32,7 @@
     self.dataSource = self;
 
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    _monthNames =  [dateFormatter standaloneMonthSymbols];
+    _monthNames =  [dateFormatter shortMonthSymbols];
     _monthDayCounts = @[@(31), @(29), @(31), @(30), @(31), @(30), @(31), @(31), @(30), @(31), @(30), @(31)];
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *dateComponents = [gregorian components:(NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:[NSDate date]];
@@ -72,6 +72,17 @@
     return (NSUInteger) (selectedMonthIndex + 1);
 }
 
+
+- (NSUInteger) selectedDay {
+
+    NSUInteger daysCount = [self daysCountForMonth:[self selectedMonth]];
+    int selectedDayIndex = [self selectedRowInComponent:DAY] % daysCount;
+    if ( -1 == selectedDayIndex) {
+        selectedDayIndex = 0;
+    }
+    return (NSUInteger) (selectedDayIndex + 1);
+}
+
 - (NSUInteger)daysCountForMonth:(int)month {
     return (NSUInteger) [_monthDayCounts[(NSUInteger) month - 1] intValue];
 }
@@ -91,5 +102,20 @@
     }
 }
 
+
+- (NSString *)selectedDayMonthString {
+    return [NSString stringWithFormat:@"%@ %d", _monthNames[[self selectedMonth]-1], [self selectedDay]];
+}
+
+- (void)selectDayMonthFromString:(NSString *)monthDayString {
+    NSInteger day  = 1;
+    NSInteger month = 1;
+    NSArray* parts = [monthDayString componentsSeparatedByString: @" "];
+    if ([parts count] == 2 ) {
+        day = [parts[1] intValue];
+        month = [_monthNames indexOfObject:parts[0]] + 1;
+    }
+    [self selectDay:day andMonth:month];
+}
 
 @end

@@ -239,6 +239,10 @@
         [dateFormatter setDateFormat:MONTH_YEAR_FORMAT];
         [textField setText:[dateFormatter stringFromDate:[datePicker date]]];
 
+    } else if (_type == DAY_MONTH_FIELD ) {
+        DayMonthDatePickView *datePicker = (DayMonthDatePickView *) textField.inputView;
+        [textField setText:[datePicker selectedDayMonthString]];
+
     }
 }
 
@@ -280,6 +284,7 @@
     } else if (_type == DAY_MONTH_FIELD) {
         //UIDatePicker *datePicker = [[UIDatePicker alloc] init];
         DayMonthDatePickView *picker = [[DayMonthDatePickView alloc] init];
+        [picker selectDayMonthFromString:textField.text];
         [textField setInputView:picker];
     }
     return !_disabled;

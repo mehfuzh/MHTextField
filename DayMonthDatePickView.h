@@ -7,4 +7,7 @@
 
 
 @interface DayMonthDatePickView : UIPickerView <UIPickerViewDelegate, UIPickerViewDataSource>
+- (NSString *)selectedDayMonthString;
+
+- (void)selectDayMonthFromString:(NSString *)monthDayString;
 @end
