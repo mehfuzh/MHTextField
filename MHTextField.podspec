@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "MHTextField"
-  s.version      = "0.0.2.1"
+  s.version      = "0.0.3"
   s.summary      = "MHTextField is an iOS drop-in class that extends UITextField with built-In toolbar, validation and scrolling support"
   s.description  = <<-DESC
 					##Requirements
@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
   s.author       = { "Mehfuz Hossain" => "mehfuz@gmail.com" }
   s.platform     = :ios, '5.0'
   s.ios.deployment_target = '5.0'
-  s.source       = { :git => "https://github.com/farmisen/MHTextField.git", :tag => '0.0.3'}
+  s.source       = { :git => "https://github.com/farmisen/MHTextField.git"}
   s.source_files  = '*.{h,m}'
   s.requires_arc = true
   s.dependency 'NSDate+Calendar'
