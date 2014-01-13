@@ -26,9 +26,10 @@ Pod::Spec.new do |s|
   s.author       = { "Mehfuz Hossain" => "mehfuz@gmail.com" }
   s.platform     = :ios, '5.0'
   s.ios.deployment_target = '5.0'
-  s.source       = { :git => "https://github.com/farmisen/MHTextField.git", :tag => '0.0.2'}
+  s.source       = { :git => "https://github.com/farmisen/MHTextField.git", :tag => '0.0.3'}
   s.source_files  = '*.{h,m}'
   s.requires_arc = true
-  s.dependency  'NSDate+Calendar'
+  s.dependency 'NSDate+Calendar'
+  s.dependency 'CJStringValidator'
 
 end

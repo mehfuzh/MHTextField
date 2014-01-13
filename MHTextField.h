@@ -11,6 +11,8 @@
 
 @protocol MHTextFieldDelegate <NSObject>
 
+#define MONTH_YEAR_FORMAT @"MMMM yyyy"
+
 typedef enum {
     UNKNOW_FIELD_TYPE,
     DATE_FIELD,
@@ -25,14 +27,13 @@ typedef enum {
 
 @end
 
-@interface MHTextField : UITextField<UITextFieldDelegate>
+@interface MHTextField : UITextField {
+    int _maxCharactersCount;
+}
 
 @property (nonatomic) BOOL required;
-@property (nonatomic, strong) UIToolbar *toolbar;
-@property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, assign) id<MHTextFieldDelegate> textFieldDelegate;
-@property(nonatomic) FieldType type;
-
-- (BOOL) validate;
+@property (nonatomic) FieldType type;
+@property(nonatomic) int maxCharactersCount;
+@property(nonatomic) BOOL disabled;
 
 @end
