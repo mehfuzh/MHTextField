@@ -1,4 +1,4 @@
-#MHTextField
+#MHTextField  [![Build Status](https://travis-ci.org/mehfuzh/MHTextField.png?branch=master)](https://travis-ci.org/mehfuzh/MHTextField)
 MHTextField is an iOS drop-in class that extends UITextField  with built-in toolbar, validation and scrolling support.
 
 [![](https://raw.github.com/mehfuzh/MHTextField/gh-pages/shot1_thumb.png)](http://mehfuzh.github.io/MHTextField/shot2.png)
