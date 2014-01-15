@@ -4,7 +4,3 @@ xcode_scheme: MHTextField_Demo
 scripts:
 - xctool -project Demo/MHTextField/MHTextField.xcodeproj -scheme MHTextField_Demo
   -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
-env:
-  global:
-  - secure: m9kK3XcRkDsOlAWoUEZmCIa9DRtXYjNg+UA6GsPxvUaSu6SN03M9Daec9xGv96LhNDcxsMfg6EEXGjJWsYBB+fSLcUkn3tpCZw1K/LK5YpEQZ9hWWnN8rpCeG8HRPLGB5SsVj9/R7nGlm3oWSLRZDuIK9Pbhfr5VO5b8AzWsF1k=
-  - secure: PcgtT/hWnOxRp59a9s8KKmImlsJcbhKBjRE2yyXo87zp8sU/TBobApg89W7GReNnPBdkgBJP7z7HDNHU0MiwWKjUIVzslcEd4SM7neSv+g4imG5YwJQZa4LFuGbfY6fj5Wft2/pCeNJNSeYyZpJgiNZqDJNgHzMIm6EzyDdrq6U=
