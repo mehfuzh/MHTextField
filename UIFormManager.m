@@ -218,8 +218,8 @@
         container = container.superview;
     }
     CGRect visibleRect = container.frame;
-    visibleRect.size.height -= _keyboardOrigin.y - visibleRect.origin.y;
     CGRect absoluteVisibleRect = [container.superview convertRect:visibleRect toView:nil];
+    absoluteVisibleRect.size.height = MIN(_keyboardOrigin.y - absoluteVisibleRect.origin.y, absoluteVisibleRect.size.height);
 
     CGPoint absoluteOrigin = [field.superview convertPoint:field.frame.origin toView:nil];
     if (!CGRectContainsPoint(absoluteVisibleRect, absoluteOrigin)) {
@@ -235,8 +235,6 @@
             container.frame = frame;
         }
     }
-
-
 }
 
 - (void)previousButtonIsClicked:(id)sender {
@@ -269,7 +267,7 @@
 
 - (void)doneButtonIsClicked:(id)sender {
     _isDoneCommand = YES;
-    _isToolBarCommand = YES;
+    _isToolBarCommand = NO;
     [_currentField resignFirstResponder];
     _currentField = nil;
 

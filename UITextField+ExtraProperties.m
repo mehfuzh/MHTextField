@@ -7,6 +7,7 @@
 
 static char minLengthKey;
 static char maxLengthKey;
+static char typeKey;
 
 
 @implementation UITextField (ExtraProperties)
@@ -29,5 +30,19 @@ static char maxLengthKey;
 - (void)setMaxLength:(int)maxLength {
     objc_setAssociatedObject(self, &maxLengthKey, [NSNumber numberWithInt:maxLength], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
+
+- (FieldType)type {
+    NSNumber *value = objc_getAssociatedObject(self, &typeKey);
+    return  (nil == value ? UNKNOW_FIELD_TYPE : (FieldType) [value intValue]);
+}
+
+- (void)setType:(FieldType)type {
+    objc_setAssociatedObject(self, &typeKey, [NSNumber numberWithInt:type], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)disabled {
+    return !self.enabled;
+}
+
 
 @end

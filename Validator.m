@@ -20,7 +20,7 @@
 + (Validator *)emailValidatorFor:(UITextField *)field {    
     Validator* validator = [[Validator alloc] initWithTextField:field];
     validator.validatationBlock = ^ BOOL () {
-        return [field.text isEmail];
+        return field.text != nil && [field.text isEmail];
     };
     return validator;
 }
@@ -28,7 +28,7 @@
 + (Validator *)presenceValidatorFor:(UITextField *)field {
     Validator* validator = [[Validator alloc] initWithTextField:field];
     validator.validatationBlock = ^ BOOL () {
-        return ![field.text isEmpty];
+        return field.text != nil && ![field.text isEmpty];
     };
     return validator;
 }
@@ -38,7 +38,7 @@
     field.minLength = min;
     field.maxLength = max;
     validator.validatationBlock = ^ BOOL () {
-        return [field.text isMinLength:min] && [field.text isMaxLength:min];
+        return field.text != nil &&  [field.text isMinLength:min] && [field.text isMaxLength:min];
     };
     return validator;
 }
@@ -56,7 +56,7 @@
 + (Validator *)matchingValidatorFor:(UITextField *)firstField and:(UITextField *)secondField {
     Validator* validator = [[Validator alloc] initWithTextField:firstField];
     validator.validatationBlock = ^ BOOL () {
-        return [firstField.text isEqualToString:secondField.text];
+        return firstField.text != nil && secondField.text != nil && [firstField.text isEqualToString:secondField.text];
     };
     return validator;
 }
