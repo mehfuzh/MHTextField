@@ -174,6 +174,10 @@
 
 - (void)keyboardDidShow:(NSNotification *)notification {
 
+    if ( nil == _currentField  || ![_textFields containsObject:_currentField]) {
+        return;
+    }
+
     NSDictionary *info = [notification userInfo];
 
     NSValue *aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
@@ -187,6 +191,10 @@
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
+
+    if ( nil == _currentField  || ![_textFields containsObject:_currentField]) {
+        return;
+    }
 
     NSTimeInterval duration = [[[notification userInfo] valueForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
 
@@ -233,6 +241,14 @@
             _savedContainerY = frame.origin.y;
             frame.origin.y += dy;
             container.frame = frame;
+        }
+    } else {
+        if ([container isKindOfClass:[UIScrollView class]]) {
+            UIScrollView *scrollView = (UIScrollView *) container;
+            _savedContainerY = scrollView.contentOffset.y;
+        } else {
+            CGRect frame = container.frame;
+            _savedContainerY = frame.origin.y;
         }
     }
 }
