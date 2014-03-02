@@ -10,6 +10,8 @@
 
 @interface MHViewController ()
 
+@property (nonatomic, strong) NSMutableArray *demos;
+
 @end
 
 @implementation MHViewController
@@ -17,43 +19,42 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    _demos = [[NSMutableArray alloc] init];
     
-    [self.view setBackgroundColor:[UIColor colorWithRed:242/255. green:242/255. blue:246/255. alpha:1.0]];
-    [self setEdgesForExtendedLayout:UIRectEdgeTop];
-	
-    [_emailTextField setRequired:YES];
-    [_emailTextField setEmailField:YES];
-    [_passwordTextField setRequired:YES];
-    [_ageTextField setDateField:YES];
+    [_demos addObject:@"Form Demo"];
+    [_demos addObject:@"Disabled Field Demo"];
+    [_demos addObject:@"Custom Field Demo"];
 }
 
-- (IBAction)createAccount:(id)sender {
-   UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Do something interesting!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-    
-    if (![self validateInputInView:self.view]){
-        
-        [alertView setMessage:@"Invalid information please review and try again!"];
-        [alertView setTitle:@"Login Failed"];
-    }
-   
-    [alertView show];
-}
-
-
-- (BOOL)validateInputInView:(UIView*)view
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    for(UIView *subView in view.subviews){
-        if ([subView isKindOfClass:[UIScrollView class]])
-            return [self validateInputInView:subView];
-       
-        if ([subView isKindOfClass:[DemoTextField class]]){
-            if (![(MHTextField*)subView validate]){
-                return NO;
-            }
-        }
+    return [_demos count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"Demo";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    if (cell == nil){
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    return YES;
+    [cell.textLabel setText:[_demos objectAtIndex:indexPath.item]];
+    
+    return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *title = [_demos objectAtIndex:indexPath.item];
+    
+    NSString *identifier =[title stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    [self performSegueWithIdentifier:identifier sender:self];
+}
+
 
 @end

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		612FC37718C27EDC00B402E3 /* MHCustomFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FC37618C27EDC00B402E3 /* MHCustomFieldViewController.m */; };
+		61315E4D18C00B4B0080C2C1 /* MHSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61315E4C18C00B4B0080C2C1 /* MHSignupViewController.m */; };
+		61315E5418C024CD0080C2C1 /* MHDisaledFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61315E5318C024CD0080C2C1 /* MHDisaledFieldViewController.m */; };
 		61FD2167184E604300884F3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FD2166184E604300884F3E /* Foundation.framework */; };
 		61FD2169184E604300884F3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FD2168184E604300884F3E /* CoreGraphics.framework */; };
 		61FD216B184E604300884F3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FD216A184E604300884F3E /* UIKit.framework */; };
@@ -36,6 +39,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		612FC37518C27EDC00B402E3 /* MHCustomFieldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHCustomFieldViewController.h; sourceTree = "<group>"; };
+		612FC37618C27EDC00B402E3 /* MHCustomFieldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHCustomFieldViewController.m; sourceTree = "<group>"; };
+		61315E4B18C00B4B0080C2C1 /* MHSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSignupViewController.h; sourceTree = "<group>"; };
+		61315E4C18C00B4B0080C2C1 /* MHSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSignupViewController.m; sourceTree = "<group>"; };
+		61315E5218C024CD0080C2C1 /* MHDisaledFieldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHDisaledFieldViewController.h; sourceTree = "<group>"; };
+		61315E5318C024CD0080C2C1 /* MHDisaledFieldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHDisaledFieldViewController.m; sourceTree = "<group>"; };
 		61FD2163184E604300884F3E /* MHTextField.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MHTextField.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61FD2166184E604300884F3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		61FD2168184E604300884F3E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -129,6 +138,12 @@
 				61FD216D184E604300884F3E /* Supporting Files */,
 				61FD219E184ED97000884F3E /* DemoTextField.h */,
 				61FD219F184ED97000884F3E /* DemoTextField.m */,
+				612FC37518C27EDC00B402E3 /* MHCustomFieldViewController.h */,
+				612FC37618C27EDC00B402E3 /* MHCustomFieldViewController.m */,
+				61315E5218C024CD0080C2C1 /* MHDisaledFieldViewController.h */,
+				61315E5318C024CD0080C2C1 /* MHDisaledFieldViewController.m */,
+				61315E4B18C00B4B0080C2C1 /* MHSignupViewController.h */,
+				61315E4C18C00B4B0080C2C1 /* MHSignupViewController.m */,
 			);
 			path = MHTextField;
 			sourceTree = "<group>";
@@ -263,6 +278,9 @@
 				61FD219D184E634200884F3E /* MHTextField.m in Sources */,
 				61FD2173184E604300884F3E /* main.m in Sources */,
 				61FD217D184E604300884F3E /* MHViewController.m in Sources */,
+				612FC37718C27EDC00B402E3 /* MHCustomFieldViewController.m in Sources */,
+				61315E4D18C00B4B0080C2C1 /* MHSignupViewController.m in Sources */,
+				61315E5418C024CD0080C2C1 /* MHDisaledFieldViewController.m in Sources */,
 				61FD2177184E604300884F3E /* MHAppDelegate.m in Sources */,
 				61FD21A0184ED97000884F3E /* DemoTextField.m in Sources */,
 			);

@@ -11,6 +11,7 @@
 {
     UITextField *_textField;
     BOOL _disabled;
+    BOOL _enabled;
 }
 
 @property (nonatomic) BOOL keyboardIsShown;
@@ -40,6 +41,11 @@
 @synthesize keyboardSize;
 @synthesize invalid;
 
+- (void) awakeFromNib{
+    [super awakeFromNib];
+    [self setup];
+}
+
 - (id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     
@@ -50,9 +56,14 @@
     return self;
 }
 
-- (void) awakeFromNib{
-    [super awakeFromNib];
-    [self setup];
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    [self markTextFieldsWithTagInView:self.superview];
+    
+    _enabled = YES;
+
 }
 
 - (void)setup{
@@ -80,8 +91,6 @@
     toolbar.items = barButtonItems;
     
     self.textFields = [[NSMutableArray alloc]init];
-    
-    [self markTextFieldsWithTagInView:self.superview];
 }
 
 - (void)markTextFieldsWithTagInView:(UIView*)view{
@@ -234,8 +243,16 @@
 - (void)setEnabled:(BOOL)enabled{
     [super setEnabled:enabled];
     
-    if (!enabled)
+    _enabled = enabled;
+    
+    [self setNeedsBackground];
+}
+
+- (void)setNeedsBackground
+{
+    if (!_enabled)
         [self setBackgroundColor:[UIColor lightGrayColor]];
+
 }
 
 - (void)setDateFieldWithFormat:(NSString *)dateFormat {
@@ -320,5 +337,6 @@
     
     _textField = nil;
 }
+
 
 @end

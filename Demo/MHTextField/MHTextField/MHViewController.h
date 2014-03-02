@@ -9,14 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DemoTextField.h"
 
-@interface MHViewController : UIViewController
-@property (strong, nonatomic) IBOutlet DemoTextField *emailTextField;
-@property (strong, nonatomic) IBOutlet DemoTextField *passwordTextField;
-@property (strong, nonatomic) IBOutlet DemoTextField *firstNameTextField;
-@property (strong, nonatomic) IBOutlet DemoTextField *lastNameTextField;
-@property (strong, nonatomic) IBOutlet DemoTextField *phoneTextField;
-@property (strong, nonatomic) IBOutlet DemoTextField *ageTextField;
-@property (strong, nonatomic) IBOutlet DemoTextField *zipTextField;
-- (IBAction)createAccount:(id)sender;
+@interface MHViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end

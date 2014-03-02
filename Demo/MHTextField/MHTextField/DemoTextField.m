@@ -10,13 +10,29 @@
 
 @implementation DemoTextField
 
-- (void)awakeFromNib{
-    [super awakeFromNib];
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
     
+    if (self != nil)
+        [self applyStyle];
+    
+    return self;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self applyStyle];
+}
+
+- (void)applyStyle
+{
     [self setBorderStyle:UITextBorderStyleNone];
     
     [self setFont: [UIFont systemFontOfSize:17]];
     [self setTintColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0]];
+
     [self setBackgroundColor:[UIColor whiteColor]];
 }
 
