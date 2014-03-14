@@ -194,8 +194,7 @@
 }
 
 - (void)scrollToField{
-    CGRect textFieldRect = _textField.frame;
-    
+    CGRect textFieldRect = [[_textField superview] convertRect:_textField.frame toView:self.window];
     CGRect aRect = self.window.bounds;
     
     aRect.origin.y = -scrollView.contentOffset.y;
