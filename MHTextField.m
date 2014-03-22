@@ -79,8 +79,8 @@
     // set style
     [toolbar setBarStyle:UIBarStyleDefault];
     
-    self.previousBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Previous" style:UIBarButtonItemStyleBordered target:self action:@selector(previousButtonIsClicked:)];
-    self.nextBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleBordered target:self action:@selector(nextButtonIsClicked:)];
+    self.previousBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Previous", @"Previous") style:UIBarButtonItemStyleBordered target:self action:@selector(previousButtonIsClicked:)];
+    self.nextBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Next", @"Next") style:UIBarButtonItemStyleBordered target:self action:@selector(nextButtonIsClicked:)];
     
     UIBarButtonItem *flexBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
@@ -194,8 +194,7 @@
 }
 
 - (void)scrollToField{
-    CGRect textFieldRect = _textField.frame;
-    
+    CGRect textFieldRect = [[_textField superview] convertRect:_textField.frame toView:self.window];
     CGRect aRect = self.window.bounds;
     
     aRect.origin.y = -scrollView.contentOffset.y;

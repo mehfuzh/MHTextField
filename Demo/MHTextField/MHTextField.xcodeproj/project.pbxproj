@@ -26,6 +26,7 @@
 		61FD2192184E604300884F3E /* MHTextFieldTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FD2191184E604300884F3E /* MHTextFieldTests.m */; };
 		61FD219D184E634200884F3E /* MHTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FD219C184E634200884F3E /* MHTextField.m */; };
 		61FD21A0184ED97000884F3E /* DemoTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FD219F184ED97000884F3E /* DemoTextField.m */; };
+		C18D49DA18D818DD004DA667 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C18D49D918D818DD004DA667 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		61FD219C184E634200884F3E /* MHTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHTextField.m; path = ../../MHTextField.m; sourceTree = "<group>"; };
 		61FD219E184ED97000884F3E /* DemoTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoTextField.h; sourceTree = "<group>"; };
 		61FD219F184ED97000884F3E /* DemoTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoTextField.m; sourceTree = "<group>"; };
+		C18D49D918D818DD004DA667 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				61FD216F184E604300884F3E /* InfoPlist.strings */,
 				61FD2172184E604300884F3E /* main.m */,
 				61FD2174184E604300884F3E /* MHTextField-Prefix.pch */,
+				C18D49D918D818DD004DA667 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				61FD217F184E604300884F3E /* Images.xcassets in Resources */,
+				C18D49DA18D818DD004DA667 /* Localizable.strings in Resources */,
 				61FD2171184E604300884F3E /* InfoPlist.strings in Resources */,
 				61FD217A184E604300884F3E /* Main.storyboard in Resources */,
 			);
