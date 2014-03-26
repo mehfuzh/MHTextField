@@ -19,7 +19,10 @@
     [super viewDidLoad];
     
     [self.view setBackgroundColor:[UIColor colorWithRed:242/255. green:242/255. blue:246/255. alpha:1.0]];
-    [self setEdgesForExtendedLayout:UIRectEdgeTop];
+    
+    // iOS 7
+    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
+        [self setEdgesForExtendedLayout:UIRectEdgeTop];
 	
     [_emailTextField setRequired:YES];
     [_emailTextField setEmailField:YES];

@@ -193,7 +193,8 @@
     [self validate];
 }
 
-- (void)scrollToField{
+- (void)scrollToField
+{
     CGRect textFieldRect = [[_textField superview] convertRect:_textField.frame toView:self.window];
     CGRect aRect = self.window.bounds;
     
@@ -280,8 +281,9 @@
     NSTimeInterval duration = [[[notification userInfo] valueForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
     [UIView animateWithDuration:duration animations:^{
-        if (_isDoneCommand)
-            [self.scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
+        if (_isDoneCommand){
+            [self.scrollView setContentOffset:CGPointMake(0, -scrollView.contentInset.top) animated:NO];
+        }
     }];
     
     keyboardIsShown = NO;
@@ -300,14 +302,16 @@
     [self setKeyboardDidShowNotificationObserver:[[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification object:nil queue:nil usingBlock:^(NSNotification *notification){
         [self keyboardDidShow:notification];
     }]];
+    
     [self setKeyboardWillHideNotificationObserver:[[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification object:nil queue:nil usingBlock:^(NSNotification *notification){
         [self keyboardWillHide:notification];
     }]];
  
     [self setBarButtonNeedsDisplayAtTag:textField.tag];
     
-    if ([self.superview isKindOfClass:[UIScrollView class]] && self.scrollView == nil)
+    if ([self.superview isKindOfClass:[UIScrollView class]] && self.scrollView == nil){
         self.scrollView = (UIScrollView*)self.superview;
+    }
     
     [self selectInputView:textField];
     [self setInputAccessoryView:toolbar];
