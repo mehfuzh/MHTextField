@@ -173,6 +173,7 @@
             }
             [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
             [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+            [dateFormatter setLocale:[NSLocale currentLocale]];
             
             NSDate *selectedDate = [dateFormatter dateFromString:textField.text];
             
