@@ -173,7 +173,11 @@
             }
             [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
             [dateFormatter setDateStyle:NSDateFormatterShortStyle];
-            [datePicker setDate:[dateFormatter dateFromString:textField.text]];
+            
+            NSDate *selectedDate = [dateFormatter dateFromString:textField.text];
+            
+            if (selectedDate != nil)
+                [datePicker setDate:selectedDate];
         }
         [textField setInputView:datePicker];
     }
@@ -187,6 +191,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [
      dateFormatter setDateFormat:@"MM/dd/YY"];
+    
     
     [_textField setText:[dateFormatter stringFromDate:selectedDate]];
     
