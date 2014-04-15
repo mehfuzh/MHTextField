@@ -63,7 +63,7 @@
     [self markTextFieldsWithTagInView:self.superview];
     
     _enabled = YES;
-
+    
 }
 
 - (void)setup{
@@ -72,7 +72,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidBeginEditing:) name:UITextFieldTextDidBeginEditingNotification object:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidEndEditing:) name:UITextFieldTextDidEndEditingNotification object:self];
-   
+    
     
     toolbar = [[UIToolbar alloc] init];
     toolbar.frame = CGRectMake(0, 0, self.window.frame.size.width, 44);
@@ -119,7 +119,7 @@
     
     while (!textField.isEnabled && tagIndex < [self.textFields count])
         textField = [self.textFields objectAtIndex:++tagIndex];
-
+    
     [self becomeActive:textField];
 }
 
@@ -145,9 +145,9 @@
     BOOL nexBarButtonEnabled = NO;
     
     for (int index = 0; index < [self.textFields count]; index++) {
-
+        
         UITextField *textField = [self.textFields objectAtIndex:index];
-    
+        
         if (index < tag)
             previousBarButtonEnabled |= textField.isEnabled;
         else if (index > tag)
@@ -159,9 +159,12 @@
 }
 
 - (void) selectInputView:(UITextField *)textField{
-    if (_isDateField){
+    if (_isDateField || _isTimeField){
         UIDatePicker *datePicker = [[UIDatePicker alloc] init];
-        datePicker.datePickerMode = UIDatePickerModeDate;
+        if (_isDateField)
+            datePicker.datePickerMode = UIDatePickerModeDate;
+        else
+            datePicker.datePickerMode = UIDatePickerModeTime;
         [datePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
         
         if (![textField.text isEqualToString:@""]){
@@ -171,6 +174,8 @@
             } else {
                 [dateFormatter setDateFormat:@"MM/dd/YY"];
             }
+            
+            [dateFormatter setTimeStyle: NSDateFormatterShortStyle];
             [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
             [dateFormatter setDateStyle:NSDateFormatterShortStyle];
             [dateFormatter setLocale:[NSLocale currentLocale]];
@@ -190,8 +195,7 @@
     NSDate *selectedDate = datePicker.date;
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [
-     dateFormatter setDateFormat:@"MM/dd/YY"];
+    [dateFormatter setDateFormat:@"MM/dd/YY"];
     
     
     [_textField setText:[dateFormatter stringFromDate:selectedDate]];
@@ -208,7 +212,7 @@
     aRect.size.height -= keyboardSize.height + self.toolbar.frame.size.height + 22;
     
     CGPoint textRectBoundary = CGPointMake(textFieldRect.origin.x, textFieldRect.origin.y + textFieldRect.size.height);
-   
+    
     if (!CGRectContainsPoint(aRect, textRectBoundary) || scrollView.contentOffset.y > 0) {
         CGPoint scrollPoint = CGPointMake(0.0, self.superview.frame.origin.y + _textField.frame.origin.y + _textField.frame.size.height - aRect.size.height);
         
@@ -240,7 +244,7 @@
             return NO;
         }
     }
-
+    
     [self setBackgroundColor:[UIColor whiteColor]];
     
     return YES;
@@ -258,7 +262,7 @@
 {
     if (!_enabled)
         [self setBackgroundColor:[UIColor lightGrayColor]];
-
+    
 }
 
 - (void)setDateFieldWithFormat:(NSString *)dateFormat {
@@ -312,7 +316,7 @@
     [self setKeyboardWillHideNotificationObserver:[[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification object:nil queue:nil usingBlock:^(NSNotification *notification){
         [self keyboardWillHide:notification];
     }]];
- 
+    
     [self setBarButtonNeedsDisplayAtTag:textField.tag];
     
     if ([self.superview isKindOfClass:[UIScrollView class]] && self.scrollView == nil){
@@ -327,8 +331,8 @@
 
 - (void)textFieldDidEndEditing:(NSNotification *) notification{
     UITextField *textField = (UITextField*)[notification object];
-   
-    if (_isDateField && [textField.text isEqualToString:@""] && _isDoneCommand){
+    
+    if ((_isDateField || _isTimeField) && [textField.text isEqualToString:@""] && _isDoneCommand){
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         
         if (self.dateFormat) {
@@ -341,7 +345,7 @@
     }
     
     [self validate];
-
+    
     [self setDoneCommand:NO];
     
     _textField = nil;

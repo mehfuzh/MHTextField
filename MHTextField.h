@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSString *dateFormat;
 @property (nonatomic, setter = setDateField:) BOOL isDateField;
+@property (nonatomic, setter = setTimeField:) BOOL isTimeField;
 @property (nonatomic, setter = setEmailField:) BOOL isEmailField;
 
 - (BOOL) validate;
