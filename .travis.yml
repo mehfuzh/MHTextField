@@ -1,0 +1,5 @@
+language: objective-c
+xcode_project: Demo/MHTextField/MHTextField.xcodeproj
+xcode_scheme: MHTextField_Demo
+script:
+ - xctool -project Demo/MHTextField/MHTextField.xcodeproj -scheme MHTextField_Demo -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
