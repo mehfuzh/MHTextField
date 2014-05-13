@@ -195,12 +195,12 @@
     NSDate *selectedDate = datePicker.date;
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
     if (self.dateFormat) {
         [dateFormatter setDateFormat:self.dateFormat];
     } else {
         [dateFormatter setDateFormat:@"MM/dd/YY"];
     }
-    
     
     [_textField setText:[dateFormatter stringFromDate:selectedDate]];
     
