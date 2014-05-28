@@ -67,8 +67,6 @@
 }
 
 - (void)setup{
-    if ([self respondsToSelector:@selector(setTintColor:)])
-        [self setTintColor:[UIColor blackColor]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidBeginEditing:) name:UITextFieldTextDidBeginEditingNotification object:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidEndEditing:) name:UITextFieldTextDidEndEditingNotification object:self];
@@ -227,10 +225,11 @@
 }
 
 - (BOOL) validate{
-    self.backgroundColor = [UIColor colorWithRed:255 green:0 blue:0 alpha:0.5];
+    
+    _isValid = YES;
     
     if (required && [self.text isEqualToString:@""]){
-        return NO;
+        _isValid = NO;
     }
     else if (_isEmailField){
         NSString *emailRegEx =
@@ -245,13 +244,19 @@
         NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
         
         if (![emailTest evaluateWithObject:self.text]){
-            return NO;
+            _isValid = NO;
         }
     }
     
-    [self setBackgroundColor:[UIColor whiteColor]];
+    [self setNeedsAppearance:self];
     
-    return YES;
+    return _isValid;
+}
+
+- (void)setDateFieldWithFormat:(NSString *)dateFormat
+{
+    self.isDateField = YES;
+    self.dateFormat = dateFormat;
 }
 
 - (void)setEnabled:(BOOL)enabled{
@@ -259,19 +264,12 @@
     
     _enabled = enabled;
     
-    [self setNeedsBackground];
+    [self setNeedsAppearance:self];
 }
 
-- (void)setNeedsBackground
+- (void)setNeedsAppearance:(id)sender
 {
-    if (!_enabled)
-        [self setBackgroundColor:[UIColor lightGrayColor]];
-    
-}
-
-- (void)setDateFieldWithFormat:(NSString *)dateFormat {
-    self.isDateField = YES;
-    self.dateFormat = dateFormat;
+    // override in child class.
 }
 
 #pragma mark - UIKeyboard notifications

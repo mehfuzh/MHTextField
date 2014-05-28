@@ -38,6 +38,18 @@
     [self setBackgroundColor:[UIColor whiteColor]];
 }
 
+- (void)setNeedsAppearance:(id)sender
+{
+    MHTextField *textField = (MHTextField*)sender;
+    
+    if (![textField isEnabled])
+        [self setBackgroundColor:[UIColor lightGrayColor]];
+    else if (![textField isValid])
+        [self setBackgroundColor:[UIColor colorWithRed:255 green:0 blue:0 alpha:0.5]];
+    else
+        [self setBackgroundColor:[UIColor whiteColor]];
+}
+
 - (CGRect)textRectForBounds:(CGRect)bounds{
     return CGRectInset(bounds, 10, 5);
 }
