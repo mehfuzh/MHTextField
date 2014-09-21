@@ -11,6 +11,7 @@
 #import "ValidationManager.h"
 #import "UITextField+ExtraProperties.h"
 
+#define is_iOS8 SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")
 
 @implementation UIFormManager {
 
@@ -227,7 +228,9 @@
     }
     CGRect visibleRect = container.frame;
     CGRect absoluteVisibleRect = [container.superview convertRect:visibleRect toView:nil];
-    absoluteVisibleRect.size.height = MIN(_keyboardOrigin.y - absoluteVisibleRect.origin.y, absoluteVisibleRect.size.height);
+    UIView *inputAccessoryView = field.inputAccessoryView;
+    float extraPadding =  inputAccessoryView ? inputAccessoryView.frame.size.height : 0;
+    absoluteVisibleRect.size.height = MIN(_keyboardOrigin.y - extraPadding - absoluteVisibleRect.origin.y, absoluteVisibleRect.size.height);
 
     CGPoint absoluteOrigin = [field.superview convertPoint:field.frame.origin toView:nil];
     if (!CGRectContainsPoint(absoluteVisibleRect, absoluteOrigin)) {
