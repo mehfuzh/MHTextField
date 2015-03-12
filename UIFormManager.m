@@ -134,10 +134,6 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     MHTextField *mhTextField = (MHTextField *) textField;
 
-    BOOL valid = [_validationManager validate:textField];
-    textField.backgroundColor = valid ? [UIColor whiteColor] : [UIColor redColor];
-
-
     //_textField = nil;
 
     if (mhTextField.type == DATE_FIELD && [textField.text isEqualToString:@""]) {
@@ -155,6 +151,10 @@
         DayMonthDatePickView *datePicker = (DayMonthDatePickView *) textField.inputView;
         [textField setText:[datePicker selectedDayMonthString]];
     }
+
+    BOOL valid = [_validationManager validate:textField];
+    textField.backgroundColor = valid ? [UIColor whiteColor] : [UIColor redColor];
+
 }
 
 
