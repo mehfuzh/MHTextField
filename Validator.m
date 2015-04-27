@@ -38,7 +38,7 @@
     field.minLength = min;
     field.maxLength = max;
     validator.validatationBlock = ^ BOOL () {
-        return field.text != nil &&  [field.text isMinLength:min] && [field.text isMaxLength:min];
+        return field.text != nil &&  [field.text isMinLength:min] && [field.text isMaxLength:max];
     };
     return validator;
 }
