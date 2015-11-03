@@ -185,7 +185,36 @@
         }
         [textField setInputView:datePicker];
     }
+    else if (_isOptionsField)
+    {
+        UIPickerView *pickerView = [[UIPickerView alloc] init];
+        pickerView.delegate = self;
+        [textField setInputView:pickerView];
+    }
 }
+
+#pragma mark UIPickerView
+-(void)pickerView:(UIPickerView *)pickerView
+     didSelectRow:(NSInteger)row
+      inComponent:(NSInteger)component{
+    NSString *selectedOption = [[self.options objectAtIndex:row] valueForKey:self.titleKey];
+    [_textField setText:selectedOption];
+    [self validate];
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView
+            titleForRow:(NSInteger)row
+           forComponent:(NSInteger)component{
+    return [[self.options objectAtIndex:row] valueForKey:self.titleKey];
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    return self.options.count;
+}
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+}
+
 
 - (void)datePickerValueChanged:(id)sender{
     UIDatePicker *datePicker = (UIDatePicker*)sender;
@@ -257,6 +286,13 @@
 {
     self.isDateField = YES;
     self.dateFormat = dateFormat;
+}
+
+-(void)setOptions:(NSArray *)options withTitleFromKey:(NSString *)key
+{
+    self.options = options;
+    self.isOptionsField = YES;
+    self.titleKey = key;
 }
 
 - (void)setEnabled:(BOOL)enabled{

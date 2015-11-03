@@ -28,6 +28,7 @@
     [_emailTextField setEmailField:YES];
     [_passwordTextField setRequired:YES];
     [_ageTextField setDateField:YES];
+    [_shoppingFrequenceTextField setOptions:@[ @{ @"title":@"Hello111", @"name":@"Danilo" }, @{ @"title":@"Hello222", @"name":@"Danilo"}] withTitleFromKey:@"title"];
 
 }
 
