@@ -20,12 +20,13 @@
 @property (nonatomic, setter = setDateField:)    BOOL isDateField;
 @property (nonatomic, setter = setTimeField:)    BOOL isTimeField;
 @property (nonatomic, setter = setOptionsField:) BOOL isOptionsField;
+@property (nonatomic, setter = setPhoneField:)   BOOL isPhoneField;
 @property (nonatomic, readonly) BOOL isValid;
 
 - (BOOL) validate;
 - (void) setDateFieldWithFormat:(NSString *)dateFormat;
 - (void) setOptions:(NSArray *)options withTitleFromKey:(NSString *)key;
-
+- (void) setPhoneFormat:(NSString *)phoneFormat;
 /*
  Invoked when text field is disabled or input is invalid. Override to set your own tint or background color.
  */

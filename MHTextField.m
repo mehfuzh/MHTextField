@@ -215,7 +215,7 @@
     return 1;
 }
 
-
+#pragma mark UIDatePicker
 - (void)datePickerValueChanged:(id)sender{
     UIDatePicker *datePicker = (UIDatePicker*)sender;
     
@@ -233,6 +233,7 @@
     
     [self validate];
 }
+
 
 - (void)scrollToField
 {
@@ -293,6 +294,12 @@
     self.options = options;
     self.isOptionsField = YES;
     self.titleKey = key;
+}
+
+-(void)setPhoneFormat:(NSString *)phoneFormat
+{
+    self.isPhoneField = YES;
+    //should implement the phone logic here
 }
 
 - (void)setEnabled:(BOOL)enabled{
