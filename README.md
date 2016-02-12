@@ -21,7 +21,7 @@ You can directly add the `MHTextField.h` and `MHTextField.m` source files to you
 3. Include MHTextField with `#import "MHTextField.h"`.
 
 
-### Cocoapods
+### CocoaPods
 [CocoaPods](http://cocoapods.org) is the recommended way to add MHTextField to your project.
 
 1. Add a pod entry for MHTextField to your Podfile `pod 'MHTextField', '~> 0.5'`
