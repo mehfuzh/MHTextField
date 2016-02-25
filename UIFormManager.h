@@ -15,5 +15,5 @@
 
 - (void)setTextFields:(NSArray *)textFields;
 
-- (BOOL)validateAll;
+- (BOOL)validateAll:(void (^)(NSString *invalidMessage))invalidFormField;
 @end

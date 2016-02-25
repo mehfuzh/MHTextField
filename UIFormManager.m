@@ -324,8 +324,27 @@
 }
 
 
-- (BOOL)validateAll {
+- (BOOL)validateAll:(void (^)(NSString *invalidMessage))invalidFormField {
+    
+    NSDictionary *formTextFields = @{
+                                     @0:@"First Name",
+                                     @1:@"Last Name",
+                                     @2:@"Email",
+                                     @3:@"Confirm Email",
+                                     @4:@"Password",
+                                     @5:@"Confirm Password",
+                                     @6:@"Mobile Number",
+                                     @7:@"Favorite Band",
+                                     @8:@"Favorite Artist",
+                                     @9:@"Birthday"
+                                     };
+    
     return [_validationManager validateAll:^(UITextField *textField, BOOL valid) {
+        if (!valid){
+            NSString *errorTextField = [formTextFields objectForKey:[NSNumber numberWithInt:textField.tag]];
+            
+            invalidFormField(errorTextField);
+        }
         textField.backgroundColor = valid ? [UIColor whiteColor] : [UIColor redColor];
     }];
 }
