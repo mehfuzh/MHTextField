@@ -229,7 +229,7 @@
 				ORGANIZATIONNAME = "Mehfuz Hossain";
 				TargetAttributes = {
 					61FD2162184E604300884F3E = {
-						DevelopmentTeam = YXKDJK6637;
+						DevelopmentTeam = Q54W3HWCCM;
 					};
 					61FD2183184E604300884F3E = {
 						TestTargetID = 61FD2162184E604300884F3E;

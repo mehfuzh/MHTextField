@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet DemoTextField *phoneTextField;
 @property (strong, nonatomic) IBOutlet DemoTextField *ageTextField;
 @property (strong, nonatomic) IBOutlet DemoTextField *zipTextField;
+@property (strong, nonatomic) IBOutlet DemoTextField *shoppingFrequenceTextField;
 
 - (IBAction)createAccount:(id)sender;
 

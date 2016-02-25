@@ -7,21 +7,26 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MHTextField : UITextField
+@interface MHTextField : UITextField <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (nonatomic) BOOL required;
 @property (nonatomic, strong) UIToolbar *toolbar;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSString *dateFormat;
+@property (nonatomic, strong) NSString *titleKey;
+@property (nonatomic, strong) NSArray *options;
 
-@property (nonatomic, setter = setEmailField:) BOOL isEmailField;
-@property (nonatomic, setter = setDateField:) BOOL isDateField;
-@property (nonatomic, setter = setTimeField:) BOOL isTimeField;
+@property (nonatomic, setter = setEmailField:)   BOOL isEmailField;
+@property (nonatomic, setter = setDateField:)    BOOL isDateField;
+@property (nonatomic, setter = setTimeField:)    BOOL isTimeField;
+@property (nonatomic, setter = setOptionsField:) BOOL isOptionsField;
+@property (nonatomic, setter = setPhoneField:)   BOOL isPhoneField;
 @property (nonatomic, readonly) BOOL isValid;
 
 - (BOOL) validate;
 - (void) setDateFieldWithFormat:(NSString *)dateFormat;
-
+- (void) setOptions:(NSArray *)options withTitleFromKey:(NSString *)key;
+- (void) setPhoneFormat:(NSString *)phoneFormat;
 /*
  Invoked when text field is disabled or input is invalid. Override to set your own tint or background color.
  */
