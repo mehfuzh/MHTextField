@@ -32,4 +32,10 @@
  */
 - (void) setNeedsAppearance:(id)sender;
 
+/*
+    Triggers hide keyboard and restores scroll offset
+ */
+- (void) done:(id)sender;
+
+
 @end

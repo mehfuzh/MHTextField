@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "MHTextField"
-  s.version      = "0.5"
+  s.version      = "0.6"
   s.summary      = "MHTextField is an iOS drop-in class that extends UITextField with built-In toolbar, validation and scrolling support"
   s.description  = <<-DESC
 					#MHTextField  [![Build Status](https://travis-ci.org/mehfuzh/MHTextField.png?branch=master)](https://travis-ci.org/mehfuzh/MHTextField)
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
 					You can directly add the `MHTextField.h` and `MHTextField.m` source files to your project.
 
 					1. Download the latest zip from github or clone the source in your desired directory.
-					2. Open your project in Xcode, then drag and drop `MHTextField.h` and `MHTextField.m` onto your project (use the "Product Navigator view"). Make sure to select Copy items when asked if you extracted the code archive outside of your project. 
+					2. Open your project in Xcode, then drag and drop `MHTextField.h` and `MHTextField.m` onto your project (use the "Product Navigator view"). Make sure to select Copy items when asked if you extracted the code archive outside of your project.
 					3. Include MHTextField with `#import "MHTextField.h"`.
 
 
@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
 
 					## License
 
-					This code is distributed under the terms and conditions of the [MIT license](LICENSE). 
+					This code is distributed under the terms and conditions of the [MIT license](LICENSE).
 
 				DESC
 
@@ -46,7 +46,7 @@ Pod::Spec.new do |s|
   s.author       = { "Mehfuz Hossain" => "mehfuz@gmail.com" }
   s.platform     = :ios, '5.0'
   s.ios.deployment_target = '5.0'
-  s.source       = { :git => "https://github.com/mehfuzh/MHTextField.git", :tag => '0.5'}
+  s.source       = { :git => "https://github.com/mehfuzh/MHTextField.git", :tag => '0.6'}
   s.source_files  = 'MHTextField.{h,m}'
   s.requires_arc = true
 
